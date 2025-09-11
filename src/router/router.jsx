@@ -1,0 +1,65 @@
+import { createBrowserRouter } from "react-router";
+import RootLayout from "../layouts/RootLayout";
+import Home from "../Pages/Home/Home";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+import BlogSection from "../Pages/BlogSection/BlogSection";
+import Login from "../Pages/Shared/Login/Login";
+import Register from "../Pages/Shared/Register/Register";
+import PrivateRoute from "../Contexts/PrivateRoute";
+import AllProperties from "../Pages/AllProperties/AllProperties";
+
+
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+        {
+            index: true,
+            Component: Home
+        },
+        {
+        path: "/properties",
+        element: (
+          <PrivateRoute>
+            <AllProperties></AllProperties>
+          </PrivateRoute>
+        ),
+      },
+      // {
+      //   path: "/property-details/:id",
+      //   element: (
+      //     <PrivateRoute>
+      //       <PropertyDetails></PropertyDetails>
+      //     </PrivateRoute>
+      //   ),
+      // },
+      {
+        path: "/register",
+        Component: Register,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/blog",
+        Component: BlogSection,
+      },
+      {
+        path: "/about-us",
+        Component: AboutUs,
+      },
+      {
+        path: "/contact-us",
+        Component: ContactUs,
+      },
+      // {
+      //   path: "/forbidden",
+      //   Component: Forbidden,
+      // },
+    ],
+  },
+]);
