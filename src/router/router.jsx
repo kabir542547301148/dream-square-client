@@ -8,6 +8,12 @@ import Login from "../Pages/Shared/Login/Login";
 import Register from "../Pages/Shared/Register/Register";
 import PrivateRoute from "../Contexts/PrivateRoute";
 import AllProperties from "../Pages/AllProperties/AllProperties";
+import DashboardLayout from "../layouts/DashboardLayout";
+import MyProperties from "../Pages/DashboardPages/MyProperties";
+import AddProperty from "../Pages/DashboardPages/AddProperty";
+import UpdateProperty from "../Pages/DashboardPages/UpdateProperty";
+import RequestedProperties from "../Pages/DashboardPages/RequestedProperties";
+import SoldProperties from "../Pages/DashboardPages/SoldProperties";
 
 
 
@@ -61,5 +67,37 @@ export const router = createBrowserRouter([
       //   Component: Forbidden,
       // },
     ],
+
+   
   },
+
+  {
+    path: '/dashboard',
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+    children: [
+      {
+        path:'/dashboard/my-properties',
+        Component: MyProperties
+      },
+      {
+        path:'/dashboard/add-property',
+        Component: AddProperty
+        
+      },
+      {
+        path: '/dashboard/update-property/:id',
+        Component: UpdateProperty
+      },
+      {
+        path: '/dashboard/requested-properties',
+        Component: RequestedProperties
+      },
+      {
+        path: '/dashboard/sold-properties',
+        Component: SoldProperties
+      },
+    ]
+  }
 ]);
