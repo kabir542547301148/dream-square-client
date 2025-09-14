@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../../Home/SocialLogin";
+import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
   const { createUser, updateUser, setUser, setLoading } = useAuth();
@@ -14,6 +15,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPW] = useState(false);
   const [loading, setLocalLoading] = useState(false);
+  const axiosInstance = useAxios();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -25,6 +27,16 @@ const Register = () => {
 
       // Save user in global auth context
       setUser({ ...user, displayName: name });
+
+      const userInfo ={
+        email,
+        role: 'user',
+        created_at: new Date().toISOString(),
+        last_log_in: new Date().toISOString()
+      }
+
+      const userRes = axiosInstance.post('/users', userInfo);
+      console.log(userRes);
 
       Swal.fire("All set!", "Registration successful.", "success");
 

@@ -1,18 +1,32 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router"; // ✅ for redirect
+import { useNavigate } from "react-router"; 
 import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const SocialLogin = () => {
   const { signInWithGoogle, setLoading } = useAuth();
-  const navigate = useNavigate(); // ✅ initialize navigate
+  const navigate = useNavigate(); 
+  const axiosInstance = useAxios();
 
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithGoogle();
+      const user = result.user;
+      console.log(result.user);
       if (!result?.user?.email) {
         throw new Error("No user information found");
       }
+
+        const userInfo ={
+        email: user.email,
+        role: 'user',
+        created_at: new Date().toISOString(),
+        last_log_in: new Date().toISOString()
+      }
+
+      const userRes = axiosInstance.post('/users', userInfo);
+      console.log(userRes);
 
       Swal.fire({
         title: "Good job!",
