@@ -7,6 +7,7 @@ import {
   FaDollarSign,
   FaHourglassHalf,
   FaUser,
+  FaUsers,
 } from 'react-icons/fa';
 
 const DashBoardLayout = () => {
@@ -43,22 +44,21 @@ const DashBoardLayout = () => {
       </div>
 
       {/* Sidebar */}
-     
+
       <div className="drawer-side">
 
-       <Link to="/">
-         <div className="mx-2 flex-1 px-2 text-red-600 text-center flex justify-center">Dashboard</div>
-       </Link>
-         
+        <Link to="/">
+          <div className="mx-2 flex-1 px-2 text-red-600 text-center flex justify-center">Dashboard</div>
+        </Link>
+
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        
+
         <ul className="menu bg-base-200 text-base-content min-h-full w-64 p-4 space-y-2">
           <li>
             <NavLink
               to="/dashboard/profile"
               className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${
-                  isActive ? 'bg-gray-300' : ''
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
                 }`
               }
             >
@@ -70,8 +70,7 @@ const DashBoardLayout = () => {
             <NavLink
               to="/dashboard/add-property"
               className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${
-                  isActive ? 'bg-gray-300' : ''
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
                 }`
               }
             >
@@ -83,8 +82,7 @@ const DashBoardLayout = () => {
             <NavLink
               to="/dashboard/my-properties"
               className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${
-                  isActive ? 'bg-gray-300' : ''
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
                 }`
               }
             >
@@ -96,8 +94,7 @@ const DashBoardLayout = () => {
             <NavLink
               to="/dashboard/sold-properties"
               className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${
-                  isActive ? 'bg-gray-300' : ''
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
                 }`
               }
             >
@@ -109,14 +106,44 @@ const DashBoardLayout = () => {
             <NavLink
               to="/dashboard/requested-properties"
               className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${
-                  isActive ? 'bg-gray-300' : ''
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
                 }`
               }
             >
               <FaHourglassHalf /> Requested Properties
             </NavLink>
           </li>
+
+
+          {/* admin related button */}
+
+
+          <li>
+            <NavLink
+              to="/dashboard/manage-users"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""
+                }`
+              }
+            >
+              <FaUsers /> Manage Users
+            </NavLink>
+          </li>
+
+
+          <li>
+            <NavLink
+              to="/dashboard/manage-properties"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""
+                }`
+              }
+            >
+              <FaHome /> Manage Properties
+            </NavLink>
+          </li>
+
+          
         </ul>
       </div>
     </div>

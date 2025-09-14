@@ -14,6 +14,7 @@ import AddProperty from "../Pages/DashboardPages/AddProperty";
 import UpdateProperty from "../Pages/DashboardPages/UpdateProperty";
 import RequestedProperties from "../Pages/DashboardPages/RequestedProperties";
 import SoldProperties from "../Pages/DashboardPages/SoldProperties";
+import ManageUsers from "../Pages/DashboardPages/Admin/ManageUsers";
 
 
 
@@ -97,6 +98,12 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/sold-properties',
         Component: SoldProperties
+      },
+
+      // admin
+      {
+        path: '/dashboard/manage-users',
+        Component: ManageUsers
       },
     ]
   }

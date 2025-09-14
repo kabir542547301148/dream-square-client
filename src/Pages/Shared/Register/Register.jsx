@@ -31,6 +31,7 @@ const Register = () => {
       const userInfo ={
         email,
         role: 'user',
+        name,
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString()
       }
