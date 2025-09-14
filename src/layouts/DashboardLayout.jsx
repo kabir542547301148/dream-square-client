@@ -8,6 +8,9 @@ import {
   FaHourglassHalf,
   FaUser,
   FaUsers,
+  FaStar,
+  FaUserShield,
+  FaHeart,
 } from 'react-icons/fa';
 
 const DashBoardLayout = () => {
@@ -54,9 +57,61 @@ const DashBoardLayout = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
         <ul className="menu bg-base-200 text-base-content min-h-full w-64 p-4 space-y-2">
+
+
+          {/* user */}
+
+
           <li>
             <NavLink
-              to="/dashboard/profile"
+              to="/dashboard/my-profile"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+              }
+            >
+              <FaUser /> My Profile
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              to="/dashboard/wishlist"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+              }
+            >
+              <FaHeart /> Wishlist
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              to="/dashboard/property-bought"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+              }
+            >
+              <FaHome /> Property Bought
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              to="/dashboard/my-reviews"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+              }
+            >
+              <FaStar /> My Reviews
+            </NavLink>
+          </li>
+
+
+
+          {/* agent */}
+          <li>
+            <NavLink
+              to="/dashboard/agent-profile"
               className={({ isActive }) =>
                 `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
                 }`
@@ -118,6 +173,19 @@ const DashBoardLayout = () => {
           {/* admin related button */}
 
 
+
+          <li>
+            <NavLink
+              to="/dashboard/admin-profile"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+              }
+            >
+              <FaUserShield /> Admin Profile
+            </NavLink>
+          </li>
+
+
           <li>
             <NavLink
               to="/dashboard/manage-users"
@@ -143,7 +211,19 @@ const DashBoardLayout = () => {
             </NavLink>
           </li>
 
-          
+
+          <li>
+            <NavLink
+              to="/dashboard/manage-reviews"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+              }
+            >
+              <FaStar /> Manage Reviews
+            </NavLink>
+          </li>
+
+
         </ul>
       </div>
     </div>

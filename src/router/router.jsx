@@ -15,6 +15,11 @@ import UpdateProperty from "../Pages/DashboardPages/UpdateProperty";
 import RequestedProperties from "../Pages/DashboardPages/RequestedProperties";
 import SoldProperties from "../Pages/DashboardPages/SoldProperties";
 import ManageUsers from "../Pages/DashboardPages/Admin/ManageUsers";
+import ManageReviews from "../Pages/DashboardPages/Admin/ManageReviews";
+import ManageProperties from "../Pages/DashboardPages/Admin/ManageProperties";
+import AdminProfile from "../Pages/DashboardPages/Admin/AdminProfile";
+import AgentProfile from "../Pages/DashboardPages/AgentProfile";
+import MyProfile from "../Pages/DashboardPages/User/MyProfile";
 
 
 
@@ -78,6 +83,36 @@ export const router = createBrowserRouter([
       <DashboardLayout></DashboardLayout>
     </PrivateRoute>,
     children: [
+
+
+      // user
+
+      {
+        path: "/dashboard/my-profile",
+        Component: MyProfile
+      },
+      {
+        path: "/dashboard/wishlist",
+        Component: MyProfile
+      },
+      {
+        path: "/dashboard/property-bought",
+        Component: MyProfile
+      },
+      {
+        path: "/dashboard/my-reviews",
+        Component: MyProfile
+      },
+
+
+
+
+
+      // agent
+      {
+        path:'/dashboard/agent-profile',
+        Component: AgentProfile
+      },
       {
         path:'/dashboard/my-properties',
         Component: MyProperties
@@ -101,10 +136,25 @@ export const router = createBrowserRouter([
       },
 
       // admin
+
+
+      {
+        path: '/dashboard/admin-profile',
+        Component: AdminProfile
+      },
       {
         path: '/dashboard/manage-users',
         Component: ManageUsers
       },
-    ]
+      {
+        path: '/dashboard/manage-reviews',
+        Component: ManageReviews
+      },
+    
+    {
+      path: '/dashboard/manage-properties',
+      Component: ManageProperties
+    },
+  ]
   }
 ]);
