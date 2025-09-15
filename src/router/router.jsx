@@ -22,6 +22,7 @@ import AgentProfile from "../Pages/DashboardPages/AgentProfile";
 import MyProfile from "../Pages/DashboardPages/User/MyProfile";
 import Forbidden from "../Pages/Shared/Forbidden";
 import AdminRoute from "../Contexts/AdminRoute";
+import AgentRoute from "../Contexts/AgentRoute";
 
 
 
@@ -113,28 +114,40 @@ export const router = createBrowserRouter([
       // agent
       {
         path:'/dashboard/agent-profile',
-        Component: AgentProfile
+        element:<AgentRoute>
+          <AgentProfile></AgentProfile>
+          </AgentRoute>
       },
       {
         path:'/dashboard/my-properties',
-        Component: MyProperties
+        element:<AgentRoute>
+          <MyProperties></MyProperties>
+          </AgentRoute>
       },
       {
         path:'/dashboard/add-property',
-        Component: AddProperty
+        element:<AgentRoute>
+          <AddProperty></AddProperty>
+          </AgentRoute>
         
       },
       {
         path: '/dashboard/update-property/:id',
-        Component: UpdateProperty
+        element:<AgentRoute>
+          <UpdateProperty></UpdateProperty>
+          </AgentRoute>
       },
       {
         path: '/dashboard/requested-properties',
-        Component: RequestedProperties
+       element:<AgentRoute>
+          <RequestedProperties></RequestedProperties>
+          </AgentRoute>
       },
       {
         path: '/dashboard/sold-properties',
-        Component: SoldProperties
+       element:<AgentRoute>
+          <SoldProperties></SoldProperties>
+          </AgentRoute>
       },
 
       // admin

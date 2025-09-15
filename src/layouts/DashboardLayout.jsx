@@ -114,65 +114,77 @@ const DashBoardLayout = () => {
 
 
           {/* agent */}
-          <li>
-            <NavLink
-              to="/dashboard/agent-profile"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
-                }`
-              }
-            >
-              <FaUser /> Agent Profile
-            </NavLink>
-          </li>
+          {!roleLoading && role === 'agent' &&
 
-          <li>
-            <NavLink
-              to="/dashboard/add-property"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
-                }`
-              }
-            >
-              <FaBoxOpen /> Add Property
-            </NavLink>
-          </li>
 
-          <li>
-            <NavLink
-              to="/dashboard/my-properties"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
-                }`
-              }
-            >
-              <FaClipboardList /> My Added Properties
-            </NavLink>
-          </li>
 
-          <li>
-            <NavLink
-              to="/dashboard/sold-properties"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
-                }`
-              }
-            >
-              <FaDollarSign /> My Sold Properties
-            </NavLink>
-          </li>
+            <>
 
-          <li>
-            <NavLink
-              to="/dashboard/requested-properties"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
-                }`
-              }
-            >
-              <FaHourglassHalf /> Requested Properties
-            </NavLink>
-          </li>
+              <li>
+                <NavLink
+                  to="/dashboard/agent-profile"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
+                    }`
+                  }
+                >
+                  <FaUser /> Agent Profile
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/dashboard/add-property"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
+                    }`
+                  }
+                >
+                  <FaBoxOpen /> Add Property
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/dashboard/my-properties"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
+                    }`
+                  }
+                >
+                  <FaClipboardList /> My Added Properties
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/dashboard/sold-properties"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
+                    }`
+                  }
+                >
+                  <FaDollarSign /> My Sold Properties
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="/dashboard/requested-properties"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? 'bg-gray-300' : ''
+                    }`
+                  }
+                >
+                  <FaHourglassHalf /> Requested Properties
+                </NavLink>
+              </li>
+
+            </>
+
+
+
+          }
 
 
           {/* admin related button */}
