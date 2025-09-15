@@ -12,8 +12,13 @@ import {
   FaUserShield,
   FaHeart,
 } from 'react-icons/fa';
+import useUserRole from '../hooks/useUserRole';
 
 const DashBoardLayout = () => {
+
+  const { role, roleLoading } = useUserRole();
+  console.log("🚀 ~ DashBoardLayout ~ role:", role)
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -174,54 +179,62 @@ const DashBoardLayout = () => {
 
 
 
-          <li>
-            <NavLink
-              to="/dashboard/admin-profile"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
-              }
-            >
-              <FaUserShield /> Admin Profile
-            </NavLink>
-          </li>
+          {!roleLoading && role === 'admin' &&
+
+            <>
 
 
-          <li>
-            <NavLink
-              to="/dashboard/manage-users"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""
-                }`
-              }
-            >
-              <FaUsers /> Manage Users
-            </NavLink>
-          </li>
+              <li>
+                <NavLink
+                  to="/dashboard/admin-profile"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+                  }
+                >
+                  <FaUserShield /> Admin Profile
+                </NavLink>
+              </li>
 
 
-          <li>
-            <NavLink
-              to="/dashboard/manage-properties"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""
-                }`
-              }
-            >
-              <FaHome /> Manage Properties
-            </NavLink>
-          </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-users"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""
+                    }`
+                  }
+                >
+                  <FaUsers /> Manage Users
+                </NavLink>
+              </li>
 
 
-          <li>
-            <NavLink
-              to="/dashboard/manage-reviews"
-              className={({ isActive }) =>
-                `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
-              }
-            >
-              <FaStar /> Manage Reviews
-            </NavLink>
-          </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-properties"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""
+                    }`
+                  }
+                >
+                  <FaHome /> Manage Properties
+                </NavLink>
+              </li>
+
+
+              <li>
+                <NavLink
+                  to="/dashboard/manage-reviews"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 px-4 py-2 rounded-md ${isActive ? "bg-gray-300" : ""}`
+                  }
+                >
+                  <FaStar /> Manage Reviews
+                </NavLink>
+              </li>
+
+            </>
+          }
 
 
         </ul>

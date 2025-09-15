@@ -20,6 +20,8 @@ import ManageProperties from "../Pages/DashboardPages/Admin/ManageProperties";
 import AdminProfile from "../Pages/DashboardPages/Admin/AdminProfile";
 import AgentProfile from "../Pages/DashboardPages/AgentProfile";
 import MyProfile from "../Pages/DashboardPages/User/MyProfile";
+import Forbidden from "../Pages/Shared/Forbidden";
+import AdminRoute from "../Contexts/AdminRoute";
 
 
 
@@ -68,10 +70,10 @@ export const router = createBrowserRouter([
         path: "/contact-us",
         Component: ContactUs,
       },
-      // {
-      //   path: "/forbidden",
-      //   Component: Forbidden,
-      // },
+      {
+        path: "/forbidden",
+        Component: Forbidden
+      },
     ],
 
    
@@ -140,20 +142,28 @@ export const router = createBrowserRouter([
 
       {
         path: '/dashboard/admin-profile',
-        Component: AdminProfile
+         element: <AdminRoute>
+        <AdminProfile></AdminProfile>
+        </AdminRoute>
       },
       {
         path: '/dashboard/manage-users',
-        Component: ManageUsers
+      element: <AdminRoute>
+        <ManageUsers></ManageUsers>
+        </AdminRoute>
       },
       {
         path: '/dashboard/manage-reviews',
-        Component: ManageReviews
+         element: <AdminRoute>
+        <ManageReviews></ManageReviews>
+        </AdminRoute>
       },
     
     {
       path: '/dashboard/manage-properties',
-      Component: ManageProperties
+     element: <AdminRoute>
+        <ManageProperties></ManageProperties>
+        </AdminRoute>
     },
   ]
   }
