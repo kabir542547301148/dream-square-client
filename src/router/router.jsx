@@ -23,6 +23,7 @@ import MyProfile from "../Pages/DashboardPages/User/MyProfile";
 import Forbidden from "../Pages/Shared/Forbidden";
 import AdminRoute from "../Contexts/AdminRoute";
 import AgentRoute from "../Contexts/AgentRoute";
+import PropertyDetails from "../Pages/AllProperties/PropertyDetails";
 
 
 
@@ -43,18 +44,19 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "/property-details/:id",
-      //   element: (
-      //     <PrivateRoute>
-      //       <PropertyDetails></PropertyDetails>
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: "/properties-details/:id",
+        element: (
+          <PrivateRoute>
+            <PropertyDetails></PropertyDetails>
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/register",
         Component: Register,
       },
+    
       {
         path: "/login",
         Component: Login,

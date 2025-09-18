@@ -1,11 +1,11 @@
 import React from 'react';
 
 const AllProperties = () => {
-    return (
-        <div>
-            <h2>All Properties</h2>
-        </div>
-    );
+  return (
+    <div>
+      <h2>all properties</h2>
+    </div>
+  );
 };
 
 export default AllProperties;

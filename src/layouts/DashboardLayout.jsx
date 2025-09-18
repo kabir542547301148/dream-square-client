@@ -67,7 +67,10 @@ const DashBoardLayout = () => {
           {/* user */}
 
 
-          <li>
+         {!roleLoading && role === 'user' &&
+          <>
+
+           <li>
             <NavLink
               to="/dashboard/my-profile"
               className={({ isActive }) =>
@@ -110,6 +113,9 @@ const DashBoardLayout = () => {
               <FaStar /> My Reviews
             </NavLink>
           </li>
+          
+          </>
+         }
 
 
 
