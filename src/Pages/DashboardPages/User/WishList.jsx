@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import FancyLoading from "../../Shared/FancyLoading/FancyLoading";
+import { Link } from "react-router";
 
 const Wishlist = () => {
     const { user } = useAuth();
@@ -89,9 +90,11 @@ const Wishlist = () => {
 
                             {/* Actions */}
                             <div className="mt-auto flex justify-between gap-2">
-                                <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-md text-sm">
-                                    Make an Offer
-                                </button>
+                                <Link to={`/dashboard/make-offer/${property._id}`}>
+                                    <button className="flex-1 bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-md text-sm">
+                                        Make an Offer
+                                    </button>
+                                </Link>
                                 <button
                                     onClick={() => removeMutation.mutate(property._id)}
                                     className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md"
