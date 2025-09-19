@@ -7,10 +7,18 @@ const ManageProperties = () => {
   const queryClient = useQueryClient();
 
   // ✅ Fetch properties
+  // const { data: properties = [], isLoading } = useQuery({
+  //   queryKey: ["properties"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get("/properties");
+  //     return res.data;
+  //   },
+  // });
+
   const { data: properties = [], isLoading } = useQuery({
-    queryKey: ["properties"],
+    queryKey: ["admin-properties"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/properties");
+      const res = await axiosSecure.get("/admin/properties");
       return res.data;
     },
   });
@@ -78,9 +86,8 @@ const ManageProperties = () => {
                     </div>
                   ) : (
                     <span
-                      className={`px-3 py-1 rounded text-white ${
-                        property.status === "verified" ? "bg-green-500" : "bg-red-500"
-                      }`}
+                      className={`px-3 py-1 rounded text-white ${property.status === "verified" ? "bg-green-500" : "bg-red-500"
+                        }`}
                     >
                       {property.status}
                     </span>

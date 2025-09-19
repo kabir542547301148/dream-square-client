@@ -249,6 +249,7 @@ const MakeOffer = () => {
                 minPrice: property.minPrice,
                 maxPrice: property.maxPrice,
                 role,
+                image: property.image,
             });
         },
         onSuccess: () => {
@@ -315,6 +316,24 @@ const MakeOffer = () => {
                         readOnly
                         className="w-full border rounded-md px-3 py-2 bg-gray-800 border-gray-700 text-gray-200"
                     />
+                </div>
+
+
+
+                {/* Property Image */}
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-300">
+                        Property Image
+                    </label>
+                    {property?.image ? (
+                        <img
+                            src={property.image}
+                            alt={property.title}
+                            className="w-full h-48 object-cover rounded-md border border-gray-700"
+                        />
+                    ) : (
+                        <p className="text-gray-500 text-sm">No image available</p>
+                    )}
                 </div>
 
                 {/* Location */}
@@ -401,8 +420,8 @@ const MakeOffer = () => {
                     type="submit"
                     disabled={offerMutation.isLoading}
                     className={`w-full py-2 rounded-md font-semibold text-white ${offerMutation.isLoading
-                            ? "bg-gray-500 cursor-not-allowed"
-                            : "bg-orange-500 hover:bg-orange-600"
+                        ? "bg-gray-500 cursor-not-allowed"
+                        : "bg-orange-500 hover:bg-orange-600"
                         }`}
                 >
                     {offerMutation.isLoading ? "Submitting..." : "Offer"}
