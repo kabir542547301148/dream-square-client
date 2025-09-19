@@ -24,6 +24,9 @@ import Forbidden from "../Pages/Shared/Forbidden";
 import AdminRoute from "../Contexts/AdminRoute";
 import AgentRoute from "../Contexts/AgentRoute";
 import PropertyDetails from "../Pages/AllProperties/PropertyDetails";
+import WishList from "../Pages/DashboardPages/User/WishList";
+import BoughtProperties from "../Pages/DashboardPages/User/BoughtProperties ";
+import MyReviews from "../Pages/DashboardPages/User/MyReviews";
 
 
 
@@ -98,15 +101,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/wishlist",
-        Component: MyProfile
+        Component: WishList,
       },
       {
         path: "/dashboard/property-bought",
-        Component: MyProfile
+        Component: BoughtProperties,
       },
       {
         path: "/dashboard/my-reviews",
-        Component: MyProfile
+        Component: MyReviews,
       },
 
 
