@@ -1,3 +1,6 @@
+
+
+
 import React, { useState } from "react";
 import { useParams } from "react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -15,7 +18,6 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import FancyLoading from "../Shared/FancyLoading/FancyLoading";
-
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -50,7 +52,7 @@ const PropertyDetails = () => {
       if (!user) throw new Error("Login required");
       await instance.post("/wishlist", {
         propertyId: id,
-        userEmail: user?.email,
+        userEmail: user.email,
         title: property.title,
         location: property.location,
         agentName: property.agentName,
@@ -59,23 +61,23 @@ const PropertyDetails = () => {
         maxPrice: property.maxPrice,
       });
     },
-    onSuccess: () =>
-      Swal.fire("Added!", "Property added to wishlist", "success"),
+    onSuccess: () => Swal.fire("Added!", "Property added to wishlist", "success"),
     onError: () => Swal.fire("Error", "Already in wishlist", "warning"),
   });
 
-  // Add review mutation
+  // Add review mutation (fixed for backend)
   const addReviewMutation = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Login required");
       if (!reviewText.trim()) throw new Error("Review cannot be empty");
-      await instance.post("/reviews", {
-        propertyId: id,
-        propertyTitle: property.title,
-        reviewer: user?.displayName,
-        reviewerEmail: user?.email,
-        reviewText,
-        reviewerPhoto: user?.photoURL,
+
+   
+
+      await instance.post(`/reviews/${id}`, {
+        userId: user.email,
+        name: user.displayName,
+        text: reviewText,
+        photo: user.photoURL,
       });
     },
     onSuccess: () => {
@@ -84,7 +86,13 @@ const PropertyDetails = () => {
       setReviewText("");
       queryClient.invalidateQueries(["reviews", id]);
     },
-    onError: () => Swal.fire("Error", "Could not submit review", "error"),
+    onError: (err) => {
+      Swal.fire(
+        "Error",
+        err?.response?.data?.message || "Could not submit review",
+        "error"
+      );
+    },
   });
 
   const handleAddToWishlist = () => {
@@ -176,13 +184,13 @@ const PropertyDetails = () => {
             >
               <div className="flex gap-3 items-center mb-2">
                 <img
-                  src={rev.reviewerPhoto || "/default-user.png"}
-                  alt={rev.reviewer}
+                  src={rev.photo || "/default-user.png"}
+                  alt={rev.name}
                   className="w-9 h-9 rounded-full object-cover border"
                 />
-                <span className="font-medium text-sm">{rev.reviewer}</span>
+                <span className="font-medium text-sm">{rev.name}</span>
               </div>
-              <p className="text-sm text-gray-800">{rev.reviewText}</p>
+              <p className="text-sm text-gray-800">{rev.text}</p>
             </div>
           ))}
         </div>
@@ -228,3 +236,4 @@ const PropertyDetails = () => {
 };
 
 export default PropertyDetails;
+
