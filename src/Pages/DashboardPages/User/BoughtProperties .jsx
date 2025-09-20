@@ -1,12 +1,18 @@
+
+
+
+
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import FancyLoading from "../../Shared/FancyLoading/FancyLoading";
+import { useNavigate } from "react-router";
 
 const BoughtProperties = () => {
     const { user } = useAuth();
     const instance = useAxiosSecure();
+    const navigate = useNavigate();
 
     const { data: boughtProperties, isLoading, isError } = useQuery({
         queryKey: ["boughtProperties", user?.email],
@@ -40,7 +46,6 @@ const BoughtProperties = () => {
                     key={item._id}
                     className="bg-gray-800 shadow-lg rounded-lg overflow-hidden"
                 >
-                    {/* Replace with actual property image if available */}
                     <img
                         src={item.image || "https://via.placeholder.com/400x200?text=Property"}
                         alt={item.title}
@@ -56,11 +61,25 @@ const BoughtProperties = () => {
                             Offer: ${item.offerAmount.toLocaleString()}
                         </p>
                         <p
-                            className={`font-semibold ${item.status === "pending" ? "text-yellow-400" : "text-green-400"
+                            className={`font-semibold ${item.status === "pending"
+                                    ? "text-yellow-400"
+                                    : item.status === "accepted"
+                                        ? "text-green-400"
+                                        : "text-red-400"
                                 }`}
                         >
                             Status: {item.status}
                         </p>
+
+                        {/* ✅ Show Pay Now button only if status is accepted */}
+                        {item.status === "accepted" && (
+                            <button
+                                onClick={() => navigate(`/payment/${item._id}`)}
+                                className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition"
+                            >
+                                Pay Now
+                            </button>
+                        )}
                     </div>
                 </div>
             ))}
@@ -69,6 +88,7 @@ const BoughtProperties = () => {
 };
 
 export default BoughtProperties;
+
 
 
 

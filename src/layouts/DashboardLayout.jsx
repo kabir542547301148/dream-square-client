@@ -310,7 +310,11 @@ const DashBoardLayout = () => {
               </svg>
             </label>
           </div>
+         <Link to="/">
+
           <div className="flex-1 px-2 text-lg font-semibold text-center">Dashboard</div>
+         
+         </Link>
         </div>
 
         {/* Page content */}

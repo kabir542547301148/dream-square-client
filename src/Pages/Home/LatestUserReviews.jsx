@@ -40,7 +40,7 @@ const LatestUserReviews = () => {
         .slice(0, 3);
 
     return (
-        <section className="max-w-7xl mx-auto px-6 py-16 bg-gradient-to-br from-[#FFF9F0] via-[#FDF6EC] to-[#FFF9F0] rounded-3xl shadow-xl my-8">
+        <section className="max-w-7xl mx-auto px-6 py-16 bg-gradient-to-br from-[#FFF9F0] via-[#FDF6EC] to-[#FFF9F0] rounded-3xl shadow-xl my-1">
             <h2 className="text-4xl font-bold mb-10 text-center text-[#2D2D2D]">
                 Latest User Reviews
             </h2>
