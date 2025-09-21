@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import FancyLoading from "../../Shared/FancyLoading/FancyLoading";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const BoughtProperties = () => {
     const { user } = useAuth();
@@ -73,12 +73,16 @@ const BoughtProperties = () => {
 
                         {/* ✅ Show Pay Now button only if status is accepted */}
                         {item.status === "accepted" && (
+                          
+
                             <button
-                                onClick={() => navigate(`/payment/${item._id}`)}
+                                onClick={() => navigate(`/dashboard/payment/${item._id}`)}
                                 className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition"
                             >
                                 Pay Now
                             </button>
+                           
+                       
                         )}
                     </div>
                 </div>

@@ -28,6 +28,7 @@ import WishList from "../Pages/DashboardPages/User/WishList";
 import BoughtProperties from "../Pages/DashboardPages/User/BoughtProperties ";
 import MyReviews from "../Pages/DashboardPages/User/MyReviews";
 import MakeOffer from "../Pages/DashboardPages/User/MakeOffer";
+import Payment from "../Pages/DashboardPages/Payment/Payment";
 
 
 
@@ -115,6 +116,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/my-reviews",
         Component: MyReviews,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        Component: Payment,
       },
 
 
