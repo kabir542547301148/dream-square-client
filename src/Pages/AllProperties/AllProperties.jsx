@@ -11,6 +11,7 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import FancyLoading from "../Shared/FancyLoading/FancyLoading";
 
 const AllProperties = () => {
   const axiosInstance = useAxiosSecure();
@@ -32,11 +33,7 @@ const AllProperties = () => {
   }
 
   if (properties.length === 0) {
-    return (
-      <div className="text-center py-16 text-[#6B7280] text-lg">
-        No verified properties found.
-      </div>
-    );
+    return <FancyLoading></FancyLoading>
   }
 
   return (

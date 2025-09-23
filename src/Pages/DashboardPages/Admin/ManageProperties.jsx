@@ -97,10 +97,9 @@
 
 // export default ManageProperties;
 
-
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure"; 
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const ManageProperties = () => {
@@ -150,6 +149,7 @@ const ManageProperties = () => {
         <table className="table w-full border">
           <thead>
             <tr>
+              <th>Image</th>
               <th>Title</th>
               <th>Location</th>
               <th>Agent Name</th>
@@ -163,6 +163,15 @@ const ManageProperties = () => {
           <tbody>
             {properties.map((property) => (
               <tr key={property._id}>
+                {/* ✅ Property Image */}
+                <td>
+                  <img
+                    src={property.image || "https://via.placeholder.com/80"}
+                    alt={property.title}
+                    className="w-20 h-16 object-cover rounded"
+                  />
+                </td>
+
                 <td>{property.title}</td>
                 <td>{property.location}</td>
                 <td>{property.agentName}</td>
@@ -200,11 +209,10 @@ const ManageProperties = () => {
                     </div>
                   ) : (
                     <span
-                      className={`px-3 py-1 rounded text-white ${
-                        property.status === "verified"
+                      className={`px-3 py-1 rounded text-white ${property.status === "verified"
                           ? "bg-green-500"
                           : "bg-red-500"
-                      }`}
+                        }`}
                     >
                       {property.status}
                     </span>
@@ -220,3 +228,4 @@ const ManageProperties = () => {
 };
 
 export default ManageProperties;
+

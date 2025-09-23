@@ -1,3 +1,7 @@
+
+
+
+
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
@@ -7,79 +11,101 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 
 const PaymentForm = () => {
-
     const stripe = useStripe();
-    const { user } = useAuth();
     const elements = useElements();
-    const axiosSecure = useAxiosSecure()
-    const { id } = useParams();
-    console.log("🚀 ~ PaymentForm ~ propertyId:", id)
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const { id } = useParams(); // <-- offerId
 
-    const [error, setError] = useState('');
-
-
-
+    // Fetch the offer details
     const { isPending, data: propertyInfo = {} } = useQuery({
-        queryKey: ["properties", id],
+        queryKey: ['offer', id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/properties/${id}`);
+            const res = await axiosSecure.get(`/offers/${id}`);
             return res.data;
         },
     });
 
-    if (isPending) return <FancyLoading />;
+    console.log(propertyInfo);
 
-    console.log("Property Info:", propertyInfo);
+    const amount = propertyInfo.offerAmount;
+    const amountInCents = amount*100;
+    console.log("🚀 ~ PaymentForm ~ amountInCents:", amountInCents)
+    
+
+
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!stripe || !elements) {
-            return;
-        }
+        if (!stripe || !elements) return;
 
         const card = elements.getElement(CardElement);
-
-        if (!card) {
-            return;
-        }
+        if (!card) return;
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
-            card
-        })
-
+            card,
+        });
 
         if (error) {
-            setError(error.message)
-        }
-        else {
+            setError(error.message);
+        } else {
             setError('');
-            console.log('payment method', paymentMethod);
+            console.log('✅ payment method created', paymentMethod);
         }
-    }
+
+         // Step 2: Create payment intent on server
+      const res = await axiosSecure.post("/create-payment-intent", {
+        amountInCents,
+        id,
+      });
+
+      const clientSecret = res.data.clientSecret;
+
+      // Step 3: Confirm payment
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+
+      if (result.error) {
+        setError(result.error.message);
+        setIsProcessing(false);
+        return;
+      }
+
+      if (result.paymentIntent.status === "succeeded") {
+        const transactionId = result.paymentIntent.id;
+      }
+    };
+
+    if (isPending) return <FancyLoading />;
+
     return (
-        <div>
-            <form onSubmit={handleSubmit} className='space-y-4 bg-white p-6 rounded-xl shadow-md w-full max-w-md mx-auto'>
+        <div className="max-w-3xl mx-auto p-6 space-y-6">
+            {/* Show property details */}
 
-                <CardElement className='p-2 border rounded-2xl'>
 
-                </CardElement>
+            {/* Stripe Payment Form */}
+            <form
+                onSubmit={handleSubmit}
+                className="space-y-4 bg-white p-6 rounded-xl shadow-md w-full"
+            >
+                <CardElement className="p-3 border rounded-xl" />
 
-                <button className='btn btn-primary w-full' type='submit' disabled={!stripe}>
-                    Pay to buy Properties
+                <button
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition"
+                    type="submit"
+                    disabled={!stripe}
+                >
+                    Pay ${propertyInfo.offerAmount?.toLocaleString()}
                 </button>
 
-                {
-                    error && <p className='text-red-600'>{error}</p>
-                }
-
-
-
+                {error && <p className="text-red-600">{error}</p>}
             </form>
-
-
         </div>
     );
 };
 
 export default PaymentForm;
+
