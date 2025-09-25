@@ -1,6 +1,5 @@
-
-import React from 'react';
-import { Link, NavLink, Outlet } from 'react-router';
+import React, { useEffect } from 'react';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import {
   FaHome,
   FaBoxOpen,
@@ -17,6 +16,17 @@ import useUserRole from '../hooks/useUserRole';
 
 const DashBoardLayout = () => {
   const { role, roleLoading } = useUserRole();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // ✅ Redirect when user visits `/dashboard`
+  useEffect(() => {
+    if (!roleLoading && location.pathname === '/dashboard') {
+      if (role === 'user') navigate('/dashboard/my-profile', { replace: true });
+      if (role === 'agent') navigate('/dashboard/agent-profile', { replace: true });
+      if (role === 'admin') navigate('/dashboard/admin-profile', { replace: true });
+    }
+  }, [role, roleLoading, location.pathname, navigate]);
 
   return (
     <div className="drawer lg:drawer-open">
@@ -43,11 +53,9 @@ const DashBoardLayout = () => {
               </svg>
             </label>
           </div>
-         <Link to="/">
-
-          <div className="flex-1 px-2 text-lg font-semibold text-center">Dashboard</div>
-
-         </Link>
+          <Link to="/">
+            <div className="flex-1 px-2 text-lg font-semibold text-center">Dashboard</div>
+          </Link>
         </div>
 
         {/* Page content */}
@@ -245,6 +253,4 @@ const DashBoardLayout = () => {
 };
 
 export default DashBoardLayout;
-
-
 
