@@ -25,11 +25,7 @@ const AllProperties = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="text-center py-10 text-[#6B7280] text-lg animate-pulse">
-        Loading Verified Properties...
-      </div>
-    );
+    return <FancyLoading></FancyLoading>
   }
 
   if (properties.length === 0) {

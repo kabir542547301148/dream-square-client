@@ -118,6 +118,7 @@ import {
   FaMapMarkerAlt,
   FaMoneyBillWave,
 } from "react-icons/fa";
+import FancyLoading from "../Shared/FancyLoading/FancyLoading";
 
 const AdvertisedProperties = () => {
   const axiosInstance = useAxios();
@@ -131,11 +132,7 @@ const AdvertisedProperties = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="text-center py-10 text-[#6B7280] text-lg animate-pulse">
-        Loading Verified Properties...
-      </div>
-    );
+    return <FancyLoading></FancyLoading>
   }
 
   if (properties.length === 0) return null;

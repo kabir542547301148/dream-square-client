@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../hooks/useAxios";
+import FancyLoading from "../Shared/FancyLoading/FancyLoading";
 
 const LatestUserReviews = () => {
     const axiosInstance = useAxios();
@@ -20,11 +21,7 @@ const LatestUserReviews = () => {
     });
 
     if (isLoading)
-        return (
-            <div className="min-h-[200px] flex justify-center items-center text-[#2F855A] font-semibold text-lg animate-pulse">
-                Loading latest reviews...
-            </div>
-        );
+        return <FancyLoading></FancyLoading>
 
     if (error)
         return (
